@@ -1,0 +1,94 @@
+﻿@model IEnumerable<RapiddAssignment.Models.EmployeeDisplayModel>
+@using RapiddAssignment.Models;
+
+@{
+    ViewBag.Title = "Page 1 Display all";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<EmployeeDisplayModel> employees = ViewBag.Employees as List<EmployeeDisplayModel>;
+}
+
+<h2>Page 1 Display all</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Employee Id
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            M/F
+        </th>
+
+        <th>
+            Position
+        </th>
+
+        <th>
+            Mobile
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+
+    </tr>
+
+    @foreach (var item in employees)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpId)
+            </td>
+            <td>
+                @Html.ActionLink(item.EmpName, "Details", new { id = item.EmpId })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                Male
+                @if (item.IsMale)
+                {
+                    @Html.CheckBox("M", true, new { @disabled = "disabled" });
+                    @Html.CheckBox("F", false, new { @disabled = "disabled" });
+
+                }
+                else
+                {
+                    @Html.CheckBox("M", false, new { @disabled = "disabled" });
+                    @Html.CheckBox("F", true, new { @disabled = "disabled" });
+
+                }
+                Female
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpPosition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNo)
+            </td>
+            <td>
+                @if (item.IsActive)
+                {
+                    @Html.CheckBox("IsActive", true, new { @disabled = "disabled" });
+                }
+                else
+                {
+                    @Html.CheckBox("IsActive", false, new { @disabled = "disabled" });
+
+                }
+            </td>
+
+        </tr>
+    }
+
+</table>
