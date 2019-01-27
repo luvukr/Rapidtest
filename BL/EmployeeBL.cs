@@ -18,7 +18,7 @@ namespace BL
             {
                 using (EmployeeDbModel dBModel = new EmployeeDbModel())
                 {
-                    emp.EmpId = new EmpDl(dBModel).GenerateGUID();
+                    emp.EmpId = Guid.NewGuid();//new EmpDl(dBModel).GenerateGUID();
                     var dlo = new EmpDl(dBModel).Add(emp);
                     dBModel.SaveChanges();
                 }
